@@ -1,0 +1,20 @@
+# Vim swap, backup, and undo files
+*.swp
+*.swo
+*~
+*.bak
+*.un~
+
+# Neovim log
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node modules (if any plugins use them)
+node_modules/
+
+# Compiled Lua (if any)
+*.luac
