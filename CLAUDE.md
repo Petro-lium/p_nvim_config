@@ -40,7 +40,8 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │       ├── telescope.lua     # Fuzzy finder (fzf-native + ui-select)
 │       ├── treesitter.lua    # Syntax highlighting + indent
 │       ├── venv-selector.lua # Python venv auto-selection
-│       └── vim-dadbod.lua    # Database UI
+│       ├── vim-dadbod.lua    # Database UI
+│       └── vim-test.lua      # Test runner
 └── .gitignore
 ```
 
@@ -174,6 +175,16 @@ Trigger: `<leader>gf` → `vim.lsp.buf.format`
 | Key | Action |
 |-----|--------|
 | `<leader>o` | Toggle code outline |
+
+### Tests (vim-test.lua)
+
+| Key | Action |
+|-----|--------|
+| `<leader>tn` | Run nearest test |
+| `<leader>tf` | Run current file tests |
+| `<leader>ta` | Run test suite |
+| `<leader>tl` | Run last test |
+| `<leader>tg` | Go to test |
 
 ### Completions (completions.lua)
 

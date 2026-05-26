@@ -40,7 +40,8 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── telescope.lua     # Fuzzy-поиск (fzf-native + ui-select)
 │       ├── treesitter.lua    # Подсветка синтаксиса + отступы
 │       ├── venv-selector.lua # Авто-выбор Python venv
-│       └── vim-dadbod.lua    # UI для баз данных
+│       ├── vim-dadbod.lua    # UI для баз данных
+│       └── vim-test.lua      # Запуск тестов
 └── .gitignore
 ```
 
@@ -136,6 +137,12 @@ Keymaps LSP:
 | `<leader>fg` | Поиск по содержимому (live grep) |
 | `<leader><leader>` | Последние файлы |
 
+### Базы данных (vim-dadbod.lua)
+
+| Клавиша | Действие |
+|---------|----------|
+| `<leader>dd` | Открыть/скрыть Dadbod UI |
+
 ### Neo-tree (neo-tree.lua)
 
 | Клавиша | Действие |
@@ -175,6 +182,16 @@ Keymaps LSP:
 |---------|----------|
 | `<leader>o` | Показать/скрыть структуру кода |
 
+### Тесты (vim-test.lua)
+
+| Клавиша | Действие |
+|---------|----------|
+| `<leader>tn` | Запустить ближайший тест |
+| `<leader>tf` | Запустить тесты текущего файла |
+| `<leader>ta` | Запустить весь тестовый набор |
+| `<leader>tl` | Запустить последний тест |
+| `<leader>tg` | Перейти к тесту |
+
 ### Автодополнение (completions.lua)
 
 | Клавиша | Действие |
@@ -195,7 +212,6 @@ Keymaps LSP:
 
 Файлы с расширением `.back` — временно отключены:
 - `kulala.lua.back` — HTTP-клиент
-- `vim-test.lua.back` — Запускайте тестов
 - `nvim-tmux-navigation.back` — Навигация в Tmux
 
 Чтобы включить: удалите `.back` из имени файла.
