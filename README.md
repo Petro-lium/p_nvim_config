@@ -11,8 +11,10 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 | Leader-клавиша | `<Space>` |
 | Фон | `light` (Catppuccin latte) |
 | Отступы | 4 пробела |
-| LSP-серверы | ruff (Python), html, djlint |
+| LSP-серверы | pyright (Python), ruff (lint), html, djlint |
+| Форматтеры | conform.nvim (stylua, prettier, djlint, ruff) |
 | Отладка | nvim-dap + debugpy (Python) |
+| Тесты | nvim-neotest (pytest) |
 | Базы данных | vim-dadbod + dadbod-ui |
 
 ## Структура проекта
@@ -41,7 +43,7 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── treesitter.lua    # Подсветка синтаксиса + отступы
 │       ├── venv-selector.lua # Авто-выбор Python venv
 │       ├── vim-dadbod.lua    # UI для баз данных
-│       └── vim-test.lua      # Запуск тестов
+│       └── neotest.lua       # Тесты (pytest, nvim-neotest)
 └── .gitignore
 ```
 
@@ -79,6 +81,7 @@ return {
 Стек: `mason.nvim` → `mason-lspconfig.nvim` → `nvim-lspconfig`
 
 Текущие серверы (в `lua/plugins/lsp-config.lua`):
+- **pyright** — полноценный LSP для Python (типы, go to definition, auto-import)
 - **ruff** — линтинг/форматирование Python
 - **html** — поддержка HTML
 - **djlint** — форматирование HTML-шаблонов
@@ -86,8 +89,8 @@ return {
 Добавить новый сервер:
 
 ```lua
-vim.lsp.config('pyright', {
-    capabilities = require('cmp_nvim_lsp').default_capabilities()
+vim.lsp.config("basedpyright", {
+    capabilities = require("cmp_nvim_lsp").default_capabilities()
 })
 ```
 
@@ -185,7 +188,7 @@ Keymaps LSP:
 |---------|----------|
 | `<leader>o` | Показать/скрыть структуру кода |
 
-### Тесты (vim-test.lua)
+### Тесты (neotest.lua)
 
 | Клавиша | Действие |
 |---------|----------|
@@ -193,7 +196,10 @@ Keymaps LSP:
 | `<leader>tf` | Запустить тесты текущего файла |
 | `<leader>ta` | Запустить весь тестовый набор |
 | `<leader>tl` | Запустить последний тест |
-| `<leader>tg` | Перейти к тесту |
+| `<leader>tt` | Дерево тестов (summary) |
+| `<leader>to` | Вывод результатов теста |
+| `<leader>td` | Отладка ближайшего теста |
+| `<leader>ts` | Панель вывода тестов |
 
 ### Автодополнение (completions.lua)
 
@@ -209,7 +215,7 @@ Keymaps LSP:
 
 1. Добавьте LSP-сервер в `lua/plugins/lsp-config.lua` через `vim.lsp.config()`
 2. Treesitter-парсеры устанавливаются автоматически (`auto_install = true`)
-3. При необходимости добавьте форматтеры/линтеры в `lua/plugins/none-ls.lua`
+3. При необходимости добавьте форматтеры в `lua/plugins/conform.lua`
 
 ## Отключённые плагины (резервные копии)
 
