@@ -34,8 +34,8 @@ return {
        })
 
        -- Git клавиши (избегаем конфликтов с LSP)
-       vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", {})
-       vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})
+       vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "git: preview hunk" })
+       vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "git: toggle blame" })
        vim.keymap.set("n", "<leader>gd", ":Gitsigns diffthis<CR>", { silent = true, desc = "Show diff" })
        vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>", { silent = true, desc = "Next hunk" })
        vim.keymap.set("n", "<leader>gN", ":Gitsigns prev_hunk<CR>", { silent = true, desc = "Prev hunk" })

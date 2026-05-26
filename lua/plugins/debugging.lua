@@ -26,8 +26,8 @@ return {
             dapui.close()
         end
 
-        vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint, {})
-        vim.keymap.set('n', '<Leader>dc', dap.continue, {})
-        vim.keymap.set('n', '<Leader>dt', dapui.toggle, {})
+        vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint, { desc = "debug: toggle breakpoint" })
+        vim.keymap.set('n', '<Leader>dc', dap.continue, { desc = "debug: continue" })
+        vim.keymap.set('n', '<Leader>dt', dapui.toggle, { desc = "debug: toggle UI" })
     end,
 }
