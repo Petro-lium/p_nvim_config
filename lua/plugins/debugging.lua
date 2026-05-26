@@ -4,7 +4,7 @@ return {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
         "theHamsta/nvim-dap-virtual-text",
-        'mfussenegger/nvim-dap-python',
+        "mfussenegger/nvim-dap-python",
     },
     config = function()
         local dap = require("dap")
@@ -26,8 +26,8 @@ return {
             dapui.close()
         end
 
-        vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint, { desc = "debug: toggle breakpoint" })
-        vim.keymap.set('n', '<Leader>dc', dap.continue, { desc = "debug: continue" })
-        vim.keymap.set('n', '<Leader>dt', dapui.toggle, { desc = "debug: toggle UI" })
+        vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "debug: toggle breakpoint" })
+        vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "debug: continue" })
+        vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "debug: toggle UI" })
     end,
 }
