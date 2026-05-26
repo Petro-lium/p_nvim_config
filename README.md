@@ -35,7 +35,7 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── lualine.lua       # Строка состояния
 │       ├── lsp-config.lua    # Mason + lspconfig (ruff, html, djlint)
 │       ├── neo-tree.lua      # Файловый браузер + bufferline
-│       ├── none-ls.lua       # Форматтеры (stylua, prettier, djlint)
+│       ├── conform.lua       # Форматтеры (stylua, prettier, djlint, ruff)
 │       ├── oil.lua           # Редактирование директории
 │       ├── telescope.lua     # Fuzzy-поиск (fzf-native + ui-select)
 │       ├── treesitter.lua    # Подсветка синтаксиса + отступы
@@ -100,17 +100,20 @@ Keymaps LSP:
 | `<leader>lr` | Найти использования |
 | `<leader>ca` | Действия над кодом (code action) |
 
-## Форматирование (none-ls)
+## Форматирование (conform.nvim)
 
-Определено в `lua/plugins/none-ls.lua`:
+Определено в `lua/plugins/conform.lua`:
 
 | Форматтер | Язык |
 |-----------|------|
+| ruff_fix + ruff_format | Python |
 | stylua | Lua |
-| prettier | JS/JSON/и др. |
+| prettier | JS/JSON/CSS/Markdown/YAML |
 | djlint | HTML-шаблоны |
 
-Запуск: `<leader>gf` → `vim.lsp.buf.format`
+Запуск: `<leader>gf` → `conform.format({ lsp_fallback = true })`
+
+Форматирование при сохранении включено автоматически.
 
 ## Обзор ключевых сочетаний
 

@@ -35,7 +35,7 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │       ├── lualine.lua       # Status line
 │       ├── lsp-config.lua    # Mason + lspconfig (ruff, html, djlint)
 │       ├── neo-tree.lua      # File explorer + bufferline
-│       ├── none-ls.lua       # Formatters (stylua, prettier, djlint)
+│       ├── conform.lua       # Formatters (stylua, prettier, djlint, ruff)
 │       ├── oil.lua           # Directory editing
 │       ├── telescope.lua     # Fuzzy finder (fzf-native + ui-select)
 │       ├── treesitter.lua    # Syntax highlighting + indent
@@ -100,17 +100,20 @@ LSP keymaps:
 | `<leader>lr` | Find references |
 | `<leader>ca` | Code action |
 
-## Formatting (none-ls)
+## Formatting (conform.nvim)
 
-Defined in `lua/plugins/none-ls.lua`:
+Defined in `lua/plugins/conform.lua`:
 
 | Formatter | Language |
 |-----------|----------|
+| ruff_fix + ruff_format | Python |
 | stylua | Lua |
-| prettier | JS/JSON/etc |
+| prettier | JS/JSON/CSS/Markdown/YAML |
 | djlint | HTML templates |
 
-Trigger: `<leader>gf` → `vim.lsp.buf.format`
+Trigger: `<leader>gf` → `conform.format({ lsp_fallback = true })`
+
+Format on save is enabled automatically.
 
 ## Keymaps Overview
 
