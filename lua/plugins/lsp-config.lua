@@ -29,13 +29,16 @@ return {
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            vim.lsp.config('djlint', {
+            vim.lsp.config("djlint", {
                 capabilities = capabilities
             })
-            vim.lsp.config('html', {
+            vim.lsp.config("html", {
                 capabilities = capabilities
             })
-            vim.lsp.config('ruff', {
+            vim.lsp.config("pyright", {
+                capabilities = capabilities
+            })
+            vim.lsp.config("ruff", {
                 capabilities = capabilities,
                 init_options = {
                     settings = {
