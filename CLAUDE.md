@@ -209,7 +209,6 @@ Format on save is enabled automatically.
 
 Files with `.back` extension — currently disabled:
 - `kulala.lua.back` — HTTP client
-- `vim-test.lua.back` — Test runner
 - `nvim-tmux-navigation.back` — Tmux nav
 
 To re-enable: remove `.back` extension.
