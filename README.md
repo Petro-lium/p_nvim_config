@@ -248,8 +248,6 @@ Keymaps LSP:
 
 ## Примечания
 
-- `vim-options.lua` использует стиль `vim.cmd("set ...")` — соответствует существующим соглашениям
 - Swap-файлы отключены (`vim.opt.swapfile = false`)
 - Фон определяется автоматически по терминалу (Catppuccin latte/mocha)
 - `.venv` автоматически определяется venv-selector (для Python-проектов)
-- Zig CC закомментирован в vim-options.lua (`vim.env.CC = "zig cc"`)
