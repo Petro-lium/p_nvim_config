@@ -1,4 +1,4 @@
-# CLAUDE.md — Конфигурация Neovim
+# README.md — Конфигурация Neovim
 
 Dotfiles для Python/web разработки на Neovim с темой Catppuccin.
 
@@ -9,7 +9,7 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 | Менеджер плагинов | lazy.nvim |
 | Тема | Catppuccin (авто: latte/mocha) |
 | Leader-клавиша | `<Space>` |
-| Фон | `light` (Catppuccin latte) |
+| Фон | auto (зависит от терминала) |
 | Отступы | 4 пробела |
 | LSP-серверы | pyright (Python), ruff (lint), html, djlint |
 | Форматтеры | conform.nvim (stylua, prettier, djlint, ruff) |
@@ -250,6 +250,6 @@ Keymaps LSP:
 
 - `vim-options.lua` использует стиль `vim.cmd("set ...")` — соответствует существующим соглашениям
 - Swap-файлы отключены (`vim.opt.swapfile = false`)
-- Фон `light` — применяется Catppuccin latte
+- Фон определяется автоматически по терминалу (Catppuccin latte/mocha)
 - `.venv` автоматически определяется venv-selector (для Python-проектов)
 - Zig CC закомментирован в vim-options.lua (`vim.env.CC = "zig cc"`)

@@ -4,17 +4,17 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 
 ## Quick Facts
 
-| Aspect | Detail |
-|--------|--------|
-| Plugin manager | lazy.nvim |
-| Theme | Catppuccin (auto: latte/mocha) |
-| Leader key | `<Space>` |
-| Background | `light` (Catppuccin latte) |
-| Indent | 4 spaces |
-| LSP servers | ruff (Python), html, djlint |
-| Debug | nvim-dap + debugpy (Python) |
-| DB | vim-dadbod + dadbod-ui |
-| HTTP Client | kulala.nvim |
+| Aspect         | Detail                                        |
+| -------------- | --------------------------------------------- |
+| Plugin manager | lazy.nvim                                     |
+| Theme          | Catppuccin (auto: latte/mocha)                |
+| Leader key     | `<Space>`                                     |
+| Background     | auto (terminal-dependent)                     |
+| Indent         | 4 spaces                                      |
+| LSP servers    | pyright (Python), ruff (Python), html, djlint |
+| Debug          | nvim-dap + debugpy (Python)                   |
+| DB             | vim-dadbod + dadbod-ui                        |
+| HTTP Client    | kulala.nvim                                   |
 
 ## Project Structure
 
@@ -41,7 +41,7 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │       ├── telescope.lua     # Fuzzy finder (fzf-native + ui-select)
 │       ├── treesitter.lua    # Syntax highlighting + indent
 │       ├── venv-selector.lua # Python venv auto-selection
-|       ├── vim-dadbod.lua    # Database UI
+│       ├── vim-dadbod.lua    # Database UI
 │       ├── kulala.lua        # HTTP client (Postman alternative)
 │       └── neotest.lua       # Tests (pytest, nvim-neotest)
 └── .gitignore
@@ -81,6 +81,7 @@ return {
 Stack: `mason.nvim` → `mason-lspconfig.nvim` → `nvim-lspconfig`
 
 Current servers (in `lua/plugins/lsp-config.lua`):
+
 - **ruff** — Python linting/formatting
 - **html** — HTML language support
 - **djlint** — HTML template formatting
@@ -95,23 +96,23 @@ vim.lsp.config('pyright', {
 
 LSP keymaps:
 
-| Key | Action |
-|-----|--------|
-| `K` | Hover documentation |
-| `<leader>ld` | Go to definition |
-| `<leader>lr` | Find references |
-| `<leader>ca` | Code action |
+| Key          | Action              |
+| ------------ | ------------------- |
+| `K`          | Hover documentation |
+| `<leader>ld` | Go to definition    |
+| `<leader>lr` | Find references     |
+| `<leader>ca` | Code action         |
 
 ## Formatting (conform.nvim)
 
 Defined in `lua/plugins/conform.lua`:
 
-| Formatter | Language |
-|-----------|----------|
-| ruff_fix + ruff_format | Python |
-| stylua | Lua |
-| prettier | JS/JSON/CSS/Markdown/YAML |
-| djlint | HTML templates |
+| Formatter              | Language                  |
+| ---------------------- | ------------------------- |
+| ruff_fix + ruff_format | Python                    |
+| stylua                 | Lua                       |
+| prettier               | JS/JSON/CSS/Markdown/YAML |
+| djlint                 | HTML templates            |
 
 Trigger: `<leader>gf` → `conform.format({ lsp_fallback = true })`
 
@@ -121,98 +122,98 @@ Format on save is enabled automatically.
 
 ### Window Navigation (vim-options.lua)
 
-| Key | Action |
-|-----|--------|
-| `<C-h>` | Window left |
-| `<C-j>` | Window down |
-| `<C-k>` | Window up |
+| Key     | Action       |
+| ------- | ------------ |
+| `<C-h>` | Window left  |
+| `<C-j>` | Window down  |
+| `<C-k>` | Window up    |
 | `<C-l>` | Window right |
 
 ### General
 
-| Key | Action |
-|-----|--------|
+| Key         | Action                 |
+| ----------- | ---------------------- |
 | `<leader>h` | Clear search highlight |
 
 ### Telescope (telescope.lua)
 
-| Key | Action |
-|-----|--------|
-| `<C-p>` | Find files |
-| `<leader>fg` | Live grep |
-| `<leader><leader>` | Old files |
+| Key                | Action     |
+| ------------------ | ---------- |
+| `<C-p>`            | Find files |
+| `<leader>fg`       | Live grep  |
+| `<leader><leader>` | Old files  |
 
 ### Neo-tree (neo-tree.lua)
 
-| Key | Action |
-|-----|--------|
-| `<C-n>` | Toggle file explorer |
+| Key          | Action                |
+| ------------ | --------------------- |
+| `<C-n>`      | Toggle file explorer  |
 | `<leader>bf` | Open buffers in float |
 
 ### Oil (oil.lua)
 
-| Key | Action |
-|-----|--------|
+| Key | Action                         |
+| --- | ------------------------------ |
 | `-` | Toggle directory edit in float |
 
 ### Git (git-stuff.lua)
 
-| Key | Action |
-|-----|--------|
-| `<leader>gh` | Preview hunk |
+| Key          | Action                    |
+| ------------ | ------------------------- |
+| `<leader>gh` | Preview hunk              |
 | `<leader>gb` | Toggle current line blame |
-| `<leader>gd` | Diff |
-| `<leader>gn` | Next hunk |
-| `<leader>gN` | Prev hunk |
-| `<leader>ga` | Stage hunk |
-| `<leader>gu` | Undo stage hunk |
+| `<leader>gd` | Diff                      |
+| `<leader>gn` | Next hunk                 |
+| `<leader>gN` | Prev hunk                 |
+| `<leader>ga` | Stage hunk                |
+| `<leader>gu` | Undo stage hunk           |
 
 ### Debug (debugging.lua)
 
-| Key | Action |
-|-----|--------|
+| Key          | Action            |
+| ------------ | ----------------- |
 | `<Leader>db` | Toggle breakpoint |
-| `<Leader>dc` | Continue |
-| `<Leader>dt` | Toggle DAP UI |
+| `<Leader>dc` | Continue          |
+| `<Leader>dt` | Toggle DAP UI     |
 
 ### Aerial (aerial.lua)
 
-| Key | Action |
-|-----|--------|
+| Key         | Action              |
+| ----------- | ------------------- |
 | `<leader>o` | Toggle code outline |
 
 ### HTTP Client (kulala.lua)
 
-| Key | Action |
-|-----|--------|
-| `<leader>Rs` | Send request |
+| Key          | Action            |
+| ------------ | ----------------- |
+| `<leader>Rs` | Send request      |
 | `<leader>Ra` | Send all requests |
-| `<leader>Rb` | Open scratchpad |
+| `<leader>Rb` | Open scratchpad   |
 
 Only active in `.http` files.
 
 ### Tests (neotest.lua)
 
-| Key | Action |
-|-----|--------|
-| `<leader>tn` | Run nearest test |
+| Key          | Action                 |
+| ------------ | ---------------------- |
+| `<leader>tn` | Run nearest test       |
 | `<leader>tf` | Run current file tests |
-| `<leader>ta` | Run test suite |
-| `<leader>tl` | Run last test |
-| `<leader>tt` | Test summary tree |
-| `<leader>to` | Test output |
-| `<leader>td` | Debug nearest test |
-| `<leader>ts` | Test output panel |
+| `<leader>ta` | Run test suite         |
+| `<leader>tl` | Run last test          |
+| `<leader>tt` | Test summary tree      |
+| `<leader>to` | Test output            |
+| `<leader>td` | Debug nearest test     |
+| `<leader>ts` | Test output panel      |
 
 ### Completions (completions.lua)
 
-| Key | Action |
-|-----|--------|
+| Key         | Action             |
+| ----------- | ------------------ |
 | `<C-Space>` | Trigger completion |
-| `<CR>` | Confirm selection |
-| `<C-e>` | Abort |
-| `<C-b>` | Scroll docs up |
-| `<C-f>` | Scroll docs down |
+| `<CR>`      | Confirm selection  |
+| `<C-e>`     | Abort              |
+| `<C-b>`     | Scroll docs up     |
+| `<C-f>`     | Scroll docs down   |
 
 ## Adding Language Support
 
@@ -223,6 +224,7 @@ Only active in `.http` files.
 ## Disabled Plugins (backed up)
 
 Files with `.back` extension — currently disabled:
+
 - `nvim-tmux-navigation.back` — Tmux nav
 
 To re-enable: remove `.back` extension.
@@ -242,6 +244,6 @@ To re-enable: remove `.back` extension.
 
 - `vim-options.lua` uses `vim.cmd("set ...")` style — matches existing convention
 - Swap files disabled (`vim.opt.swapfile = false`)
-- Background is `light` — Catppuccin latte applies
+- Background is auto-detected from terminal — Catppuccin latte/mocha
 - `.venv` auto-detected by venv-selector (Python projects)
 - Zig CC is commented out in vim-options.lua (`vim.env.CC = "zig cc"`)
