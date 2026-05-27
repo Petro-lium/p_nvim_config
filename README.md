@@ -43,6 +43,7 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── treesitter.lua    # Подсветка синтаксиса + отступы
 │       ├── venv-selector.lua # Авто-выбор Python venv
 │       ├── vim-dadbod.lua    # UI для баз данных
+│       ├── kulala.lua        # HTTP-клиент (аналог Postman)
 │       └── neotest.lua       # Тесты (pytest, nvim-neotest)
 └── .gitignore
 ```
@@ -188,6 +189,16 @@ Keymaps LSP:
 |---------|----------|
 | `<leader>o` | Показать/скрыть структуру кода |
 
+### HTTP-клиент (kulala.lua)
+
+| Клавиша | Действие |
+|---------|----------|
+| `<leader>Rs` | Отправить запрос (Send request) |
+| `<leader>Ra` | Отправить все запросы (Send all) |
+| `<leader>Rb` | Открыть scratchpad |
+
+Работает в файлах с расширением `.http`.
+
 ### Тесты (neotest.lua)
 
 | Клавиша | Действие |
@@ -220,7 +231,6 @@ Keymaps LSP:
 ## Отключённые плагины (резервные копии)
 
 Файлы с расширением `.back` — временно отключены:
-- `kulala.lua.back` — HTTP-клиент
 - `nvim-tmux-navigation.back` — Навигация в Tmux
 
 Чтобы включить: удалите `.back` из имени файла.

@@ -14,6 +14,7 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 | LSP servers | ruff (Python), html, djlint |
 | Debug | nvim-dap + debugpy (Python) |
 | DB | vim-dadbod + dadbod-ui |
+| HTTP Client | kulala.nvim |
 
 ## Project Structure
 
@@ -40,8 +41,9 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │       ├── telescope.lua     # Fuzzy finder (fzf-native + ui-select)
 │       ├── treesitter.lua    # Syntax highlighting + indent
 │       ├── venv-selector.lua # Python venv auto-selection
-│       ├── vim-dadbod.lua    # Database UI
-│       └── vim-test.lua      # Test runner
+|       ├── vim-dadbod.lua    # Database UI
+│       ├── kulala.lua        # HTTP client (Postman alternative)
+│       └── neotest.lua       # Tests (pytest, nvim-neotest)
 └── .gitignore
 ```
 
@@ -179,7 +181,17 @@ Format on save is enabled automatically.
 |-----|--------|
 | `<leader>o` | Toggle code outline |
 
-### Tests (vim-test.lua)
+### HTTP Client (kulala.lua)
+
+| Key | Action |
+|-----|--------|
+| `<leader>Rs` | Send request |
+| `<leader>Ra` | Send all requests |
+| `<leader>Rb` | Open scratchpad |
+
+Only active in `.http` files.
+
+### Tests (neotest.lua)
 
 | Key | Action |
 |-----|--------|
@@ -187,7 +199,10 @@ Format on save is enabled automatically.
 | `<leader>tf` | Run current file tests |
 | `<leader>ta` | Run test suite |
 | `<leader>tl` | Run last test |
-| `<leader>tg` | Go to test |
+| `<leader>tt` | Test summary tree |
+| `<leader>to` | Test output |
+| `<leader>td` | Debug nearest test |
+| `<leader>ts` | Test output panel |
 
 ### Completions (completions.lua)
 
@@ -208,7 +223,6 @@ Format on save is enabled automatically.
 ## Disabled Plugins (backed up)
 
 Files with `.back` extension — currently disabled:
-- `kulala.lua.back` — HTTP client
 - `nvim-tmux-navigation.back` — Tmux nav
 
 To re-enable: remove `.back` extension.
