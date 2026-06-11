@@ -26,6 +26,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         lazy = false,
+        dependencies = { "hrsh7th/cmp-nvim-lsp" },
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -40,11 +41,9 @@ return {
             })
             vim.lsp.config("ruff", {
                 capabilities = capabilities,
-                init_options = {
-                    settings = {
-                        args = {},
-                    }
-                }
+                settings = {
+                    args = {},
+                },
             })
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: hover" })

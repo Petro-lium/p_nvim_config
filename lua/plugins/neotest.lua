@@ -37,7 +37,7 @@ return {
             vim.keymap.set("n", "<leader>tn", "<cmd>Neotest nearest<CR>", { desc = "test: run nearest" })
             vim.keymap.set("n", "<leader>tf", "<cmd>Neotest file<CR>", { desc = "test: run file" })
             vim.keymap.set("n", "<leader>ta", "<cmd>Neotest suite<CR>", { desc = "test: run suite" })
-            vim.keymap.set("n", "<leader>tl", "<cmd>Neotest run <leader>fl<CR>", { desc = "test: run last" })
+            vim.keymap.set("n", "<leader>tl", "<cmd>Neotest run<CR>", { desc = "test: run last" })
             vim.keymap.set("n", "<leader>td", "<cmd>Neotest debug nearest<CR>", { desc = "test: debug nearest" })
             vim.keymap.set("n", "<leader>to", "<cmd>Neotest output<CR>", { desc = "test: show output" })
             vim.keymap.set("n", "<leader>ts", "<cmd>Neotest output-pane<CR>", { desc = "test: show output pane" })
