@@ -1,0 +1,19 @@
+###
+# Get a single post
+GET https://jsonplaceholder.typicode.com/posts/1
+
+###
+
+# Get list of posts (limited)
+GET https://jsonplaceholder.typicode.com/posts?_limit=5
+
+###POST 
+# Create a test post
+POST https://jsonplaceholder.typicode.com/posts
+Content-Type: application/json
+
+{
+    "title": "REST Test",
+    "body": "Testing kulala with .rest extension",
+    "userId": 1
+}

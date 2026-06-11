@@ -16,5 +16,12 @@ vim.keymap.set("n", "<c-l>", ":wincmd l<CR>", { desc = "window: right" })
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "clear search highlight" })
 vim.wo.number = true
 
+vim.filetype.add({
+    extension = {
+        http = "http",
+        rest = "http",
+    },
+})
+
 -- ZIG
--- vim.env.CC = "zig cc"
+-- vim.env.CC = "clang"
