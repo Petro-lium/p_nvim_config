@@ -4,28 +4,26 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 
 ## Краткая справка
 
-| Параметр | Значение |
-|----------|----------|
-| Менеджер плагинов | lazy.nvim |
-| Тема | Catppuccin (авто: latte/mocha) |
-| Leader-клавиша | `<Space>` |
-| Фон | auto (зависит от терминала) |
-| Отступы | 4 пробела |
-| LSP-серверы | pyright (Python), ruff (lint), html, djlint |
-| Форматтеры | conform.nvim (stylua, prettier, djlint, ruff) |
-| Отладка | nvim-dap + debugpy (Python) |
-| Тесты | nvim-neotest (pytest) |
-| Базы данных | vim-dadbod + dadbod-ui |
+| Параметр          | Значение                                      |
+| ----------------- | --------------------------------------------- |
+| Менеджер плагинов | lazy.nvim                                     |
+| Тема              | Catppuccin (авто: latte/mocha)                |
+| Leader-клавиша    | `<Space>`                                     |
+| Фон               | auto (зависит от терминала)                   |
+| Отступы           | 4 пробела                                     |
+| LSP-серверы       | pyright (Python), ruff (lint), html, djlint   |
+| Форматтеры        | conform.nvim (stylua, prettier, djlint, ruff) |
+| Отладка           | nvim-dap + debugpy (Python)                   |
+| Тесты             | nvim-neotest (pytest)                         |
+| Базы данных       | vim-dadbod + dadbod-ui                        |
 
 ## Структура проекта
 
 ```
-~/.local/share/nvim/          # XDG data (здесь устанавливаются плагины)
-~/.config/nvim/               # XDG config (Linux/macOS)
 %LOCALAPPDATA%\nvim\          # Конфиг Windows (этот репозиторий)
 ├── init.lua                  # Точка входа — запускает lazy.nvim, загружает vim-options + плагины
 ├── lua/
-│   ├── vim-options.lua       # Основные опции, leader-клавиша, навигация по окнам
+│   ├── vim-options.lua       # Основные опции, leader-клавиша, навигация, определения типов файлов
 │   ├── plugins.lua           # Пустой заглушка (return {}) — оставлен для lazy.nvim
 │   └── plugins/              # Один файл на плагин или группу плагинов
 │       ├── alpha.lua         # Стартовый экран (dashboard с ASCII-артом)
@@ -35,15 +33,15 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── debugging.lua     # nvim-dap + dap-ui + dap-python
 │       ├── git-stuff.lua     # vim-fugitive + gitsigns
 │       ├── lualine.lua       # Строка состояния
-│       ├── lsp-config.lua    # Mason + lspconfig (ruff, html, djlint)
+│       ├── lsp-config.lua    # Mason + lspconfig (ruff, html, djlint, pyright)
 │       ├── neo-tree.lua      # Файловый браузер + bufferline
 │       ├── conform.lua       # Форматтеры (stylua, prettier, djlint, ruff)
 │       ├── oil.lua           # Редактирование директории
 │       ├── telescope.lua     # Fuzzy-поиск (fzf-native + ui-select)
-│       ├── treesitter.lua    # Подсветка синтаксиса + отступы
+│       ├── treesitter.lua    # Подсветка синтаксиса + отступы (MSVC 'cl' на Windows)
 │       ├── venv-selector.lua # Авто-выбор Python venv
 │       ├── vim-dadbod.lua    # UI для баз данных
-│       ├── kulala.lua        # HTTP-клиент (аналог Postman)
+│       ├── kulala.lua        # HTTP-клиент (.http, .rest)
 │       └── neotest.lua       # Тесты (pytest, nvim-neotest)
 └── .gitignore
 ```
@@ -82,38 +80,31 @@ return {
 Стек: `mason.nvim` → `mason-lspconfig.nvim` → `nvim-lspconfig`
 
 Текущие серверы (в `lua/plugins/lsp-config.lua`):
+
 - **pyright** — полноценный LSP для Python (типы, go to definition, auto-import)
 - **ruff** — линтинг/форматирование Python
 - **html** — поддержка HTML
 - **djlint** — форматирование HTML-шаблонов
 
-Добавить новый сервер:
+LSP-клавиши (активны только в файлах с подключенным LSP):
 
-```lua
-vim.lsp.config("basedpyright", {
-    capabilities = require("cmp_nvim_lsp").default_capabilities()
-})
-```
-
-Keymaps LSP:
-
-| Клавиша | Действие |
-|---------|----------|
-| `K` | Показать документацию (hover) |
-| `<leader>ld` | Перейти к определению |
-| `<leader>lr` | Найти использования |
+| Клавиша      | Действие                         |
+| ------------ | -------------------------------- |
+| `K`          | Показать документацию (hover)    |
+| `<leader>ld` | Перейти к определению            |
+| `<leader>lr` | Найти использования              |
 | `<leader>ca` | Действия над кодом (code action) |
 
 ## Форматирование (conform.nvim)
 
 Определено в `lua/plugins/conform.lua`:
 
-| Форматтер | Язык |
-|-----------|------|
-| ruff_fix + ruff_format | Python |
-| stylua | Lua |
-| prettier | JS/JSON/CSS/Markdown/YAML |
-| djlint | HTML-шаблоны |
+| Форматтер              | Язык                      |
+| ---------------------- | ------------------------- |
+| ruff_fix + ruff_format | Python                    |
+| stylua                 | Lua                       |
+| prettier               | JS/JSON/CSS/Markdown/YAML |
+| djlint                 | HTML-шаблоны              |
 
 Запуск: `<leader>gf` → `conform.format({ lsp_fallback = true })`
 
@@ -123,104 +114,105 @@ Keymaps LSP:
 
 ### Навигация по окнам (vim-options.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<C-h>` | Окно влево |
-| `<C-j>` | Окно вниз |
-| `<C-k>` | Окно вверх |
+| Клавиша | Действие    |
+| ------- | ----------- |
+| `<C-h>` | Окно влево  |
+| `<C-j>` | Окно вниз   |
+| `<C-k>` | Окно вверх  |
 | `<C-l>` | Окно вправо |
 
 ### Общие
 
-| Клавиша | Действие |
-|---------|----------|
+| Клавиша     | Действие               |
+| ----------- | ---------------------- |
 | `<leader>h` | Снять подсветку поиска |
 
 ### Telescope (telescope.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<C-p>` | Найти файлы |
-| `<leader>fg` | Поиск по содержимому (live grep) |
-| `<leader><leader>` | Последние файлы |
+| Клавиша            | Действие                         |
+| ------------------ | -------------------------------- |
+| `<C-p>`            | Найти файлы                      |
+| `<leader>fg`       | Поиск по содержимому (live grep) |
+| `<leader><leader>` | Последние файлы                  |
 
 ### Базы данных (vim-dadbod.lua)
 
-| Клавиша | Действие |
-|---------|----------|
+| Клавиша      | Действие                 |
+| ------------ | ------------------------ |
 | `<leader>dd` | Открыть/скрыть Dadbod UI |
 
 ### Neo-tree (neo-tree.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<C-n>` | Показать/скрыть файловый браузер |
-| `<leader>bf` | Открыть буферы во float-окне |
+| Клавиша      | Действие                         |
+| ------------ | -------------------------------- |
+| `<C-n>`      | Показать/скрыть файловый браузер |
+| `<leader>bf` | Открыть буферы во float-окне     |
 
 ### Oil (oil.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `-` | Редактировать директорию во float-окне |
+| Клавиша | Действие                               |
+| ------- | -------------------------------------- |
+| `-`     | Редактировать директорию во float-окне |
 
 ### Git (git-stuff.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<leader>gh` | Просмотр hunk'а |
+| Клавиша      | Действие                      |
+| ------------ | ----------------------------- |
+| `<leader>gh` | Просмотр hunk'а               |
 | `<leader>gb` | Вкл/выкл blame текущей строки |
-| `<leader>gd` | Показать diff |
-| `<leader>gn` | Следующий hunk |
-| `<leader>gN` | Предыдущий hunk |
-| `<leader>ga` | Добавить hunk в staging |
-| `<leader>gu` | Убрать hunk из staging |
+| `<leader>gd` | Показать diff                 |
+| `<leader>gn` | Следующий hunk                |
+| `<leader>gN` | Предыдущий hunk               |
+| `<leader>ga` | Добавить hunk в staging       |
+| `<leader>gu` | Убрать hunk из staging        |
+| `<leader>gA` | Добавить файл в staging       |
 
 ### Отладка (debugging.lua)
 
-| Клавиша | Действие |
-|---------|----------|
+| Клавиша      | Действие                |
+| ------------ | ----------------------- |
 | `<Leader>db` | Вкл/выкл точку останова |
-| `<Leader>dc` | Продолжить выполнение |
-| `<Leader>dt` | Показать/скрыть DAP UI |
+| `<Leader>dc` | Продолжить выполнение   |
+| `<Leader>dt` | Показать/скрыть DAP UI  |
 
 ### Aerial (aerial.lua)
 
-| Клавиша | Действие |
-|---------|----------|
+| Клавиша     | Действие                       |
+| ----------- | ------------------------------ |
 | `<leader>o` | Показать/скрыть структуру кода |
 
 ### HTTP-клиент (kulala.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<leader>Rs` | Отправить запрос (Send request) |
+| Клавиша      | Действие                         |
+| ------------ | -------------------------------- |
+| `<leader>Rs` | Отправить запрос (Send request)  |
 | `<leader>Ra` | Отправить все запросы (Send all) |
-| `<leader>Rb` | Открыть scratchpad |
+| `<leader>Rb` | Открыть scratchpad               |
 
-Работает в файлах с расширением `.http`.
+Работает в файлах с расширением `.http` и `.rest`.
 
 ### Тесты (neotest.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<leader>tn` | Запустить ближайший тест |
+| Клавиша      | Действие                       |
+| ------------ | ------------------------------ |
+| `<leader>tn` | Запустить ближайший тест       |
 | `<leader>tf` | Запустить тесты текущего файла |
-| `<leader>ta` | Запустить весь тестовый набор |
-| `<leader>tl` | Запустить последний тест |
-| `<leader>tt` | Дерево тестов (summary) |
-| `<leader>to` | Вывод результатов теста |
-| `<leader>td` | Отладка ближайшего теста |
-| `<leader>ts` | Панель вывода тестов |
+| `<leader>ta` | Запустить весь тестовый набор  |
+| `<leader>tl` | Запустить последний тест       |
+| `<leader>tt` | Дерево тестов (summary)        |
+| `<leader>to` | Вывод результатов теста        |
+| `<leader>td` | Отладка ближайшего теста       |
+| `<leader>ts` | Панель вывода тестов           |
 
 ### Автодополнение (completions.lua)
 
-| Клавиша | Действие |
-|---------|----------|
-| `<C-Space>` | Вызвать автодополнение |
-| `<CR>` | Подтвердить выбор |
-| `<C-e>` | Отменить |
-| `<C-b>` | Прокрутить документацию вверх |
-| `<C-f>` | Прокрутить документацию вниз |
+| Клавиша     | Действие                      |
+| ----------- | ----------------------------- |
+| `<C-Space>` | Вызвать автодополнение        |
+| `<CR>`      | Подтвердить выбор             |
+| `<C-e>`     | Отменить                      |
+| `<C-b>`     | Прокрутить документацию вверх |
+| `<C-f>`     | Прокрутить документацию вниз  |
 
 ## Добавление поддержки языка
 
@@ -231,11 +223,12 @@ Keymaps LSP:
 ## Отключённые плагины (резервные копии)
 
 Файлы с расширением `.back` — временно отключены:
+
 - `nvim-tmux-navigation.back` — Навигация в Tmux
 
 Чтобы включить: удалите `.back` из имени файла.
 
-## Распространённые задачи
+## Распространенённые задачи
 
 ```
 :Lazy              # Панель статуса плагинов
@@ -251,3 +244,4 @@ Keymaps LSP:
 - Swap-файлы отключены (`vim.opt.swapfile = false`)
 - Фон определяется автоматически по терминалу (Catppuccin latte/mocha)
 - `.venv` автоматически определяется venv-selector (для Python-проектов)
+- Файлы `.rest` теперь распознаются как `http` через `vim.filetype.add` в `vim-options.lua`

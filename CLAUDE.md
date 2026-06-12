@@ -19,12 +19,10 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 ## Project Structure
 
 ```
-~/.local/share/nvim/          # XDG data (plugins installed here)
-~/.config/nvim/               # XDG config (on Linux/macOS)
 %LOCALAPPDATA%\nvim\          # Windows config (this repo)
 ├── init.lua                  # Entry point — bootstraps lazy.nvim, loads vim-options + plugins
 ├── lua/
-│   ├── vim-options.lua       # Core options, leader key, window nav keymaps
+│   ├── vim-options.lua       # Core options, leader key, window nav keymaps, filetype overrides
 │   ├── plugins.lua           # Empty stub (return {}) — kept for lazy.nvim discovery
 │   └── plugins/              # One file per plugin or plugin group
 │       ├── alpha.lua         # Start screen (ASCII art dashboard)
@@ -39,10 +37,10 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │       ├── conform.lua       # Formatters (stylua, prettier, djlint, ruff)
 │       ├── oil.lua           # Directory editing
 │       ├── telescope.lua     # Fuzzy finder (fzf-native + ui-select)
-│       ├── treesitter.lua    # Syntax highlighting + indent
+│       ├── treesitter.lua    # Syntax highlighting + indent (uses MSVC 'cl' on Windows)
 │       ├── venv-selector.lua # Python venv auto-selection
 │       ├── vim-dadbod.lua    # Database UI
-│       ├── kulala.lua        # HTTP client (Postman alternative)
+│       ├── kulala.lua        # HTTP client (.http, .rest)
 │       └── neotest.lua       # Tests (pytest, nvim-neotest)
 └── .gitignore
 ```
@@ -85,16 +83,9 @@ Current servers (in `lua/plugins/lsp-config.lua`):
 - **ruff** — Python linting/formatting
 - **html** — HTML language support
 - **djlint** — HTML template formatting
+- **pyright** — Python type checking
 
-Add a new server:
-
-```lua
-vim.lsp.config('pyright', {
-    capabilities = require('cmp_nvim_lsp').default_capabilities()
-})
-```
-
-LSP keymaps:
+LSP keymaps (active only on LspAttach):
 
 | Key          | Action              |
 | ------------ | ------------------- |
@@ -167,6 +158,7 @@ Format on save is enabled automatically.
 | `<leader>gN` | Prev hunk                 |
 | `<leader>ga` | Stage hunk                |
 | `<leader>gu` | Undo stage hunk           |
+| `<leader>gA` | Add file in stage         |
 
 ### Debug (debugging.lua)
 
@@ -190,7 +182,7 @@ Format on save is enabled automatically.
 | `<leader>Ra` | Send all requests |
 | `<leader>Rb` | Open scratchpad   |
 
-Only active in `.http` files.
+Active in `.http` and `.rest` files.
 
 ### Tests (neotest.lua)
 
@@ -217,9 +209,9 @@ Only active in `.http` files.
 
 ## Adding Language Support
 
-1. Add LSP server in `lua/plugins/lsp-config.lua` via `vim.lsp.config()`
+1. Add LSP server in `lua/plugins/lsp-config.lua` using `vim.lsp.config()`
 2. Treesitter parsers install automatically (`auto_install = true`)
-3. Add formatters/linters to `lua/plugins/none-ls.lua` if needed
+3. Add formatters/linters to `lua/plugins/conform.lua` if needed
 
 ## Disabled Plugins (backed up)
 
@@ -246,4 +238,4 @@ To re-enable: remove `.back` extension.
 - Swap files disabled (`vim.opt.swapfile = false`)
 - Background is auto-detected from terminal — Catppuccin latte/mocha
 - `.venv` auto-detected by venv-selector (Python projects)
-- Zig CC is commented out in vim-options.lua (`vim.env.CC = "zig cc"`)
+- Filetype overrides for .rest -> http are defined in vim-options.lua
