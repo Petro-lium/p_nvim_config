@@ -17,10 +17,51 @@ vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "clear search highl
 vim.wo.number = true
 
 vim.filetype.add({
-    extension = {
-        http = "http",
-        rest = "http",
-    },
+	extension = {
+		http = "http",
+		rest = "http",
+	},
+})
+
+-- ====================================================
+-- Динамические отступы в зависимости от типа файла
+-- ====================================================
+local indent_group = vim.api.nvim_create_augroup("UserIndentSettings", { clear = true })
+
+-- 4 пробела для Python
+vim.api.nvim_create_autocmd("FileType", {
+	group = indent_group,
+	pattern = "python",
+	callback = function()
+		vim.opt_local.expandtab = true
+		vim.opt_local.tabstop = 4
+		vim.opt_local.softtabstop = 4
+		vim.opt_local.shiftwidth = 4
+	end,
+})
+
+-- 2 пробела для JavaScript, TypeScript, Lua и веб-языков
+vim.api.nvim_create_autocmd("FileType", {
+	group = indent_group,
+	pattern = {
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"lua",
+		"html",
+		"css",
+		"sql",
+		"json",
+		"yaml",
+		"markdown",
+	},
+	callback = function()
+		vim.opt_local.expandtab = true
+		vim.opt_local.tabstop = 2
+		vim.opt_local.softtabstop = 2
+		vim.opt_local.shiftwidth = 2
+	end,
 })
 
 -- ZIG
