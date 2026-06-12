@@ -4,7 +4,7 @@ return {
 		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
+			"mini.icons",
 			"MunifTanjim/nui.nvim",
 		},
 		lazy = false,
@@ -16,7 +16,7 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		dependencies = "mini.icons",
 		lazy = false,
 		config = function()
 			vim.opt.termguicolors = true

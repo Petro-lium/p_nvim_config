@@ -153,12 +153,13 @@ Format on save is enabled automatically.
 | ------------ | ------------------------- |
 | `<leader>gh` | Preview hunk              |
 | `<leader>gb` | Toggle current line blame |
-| `<leader>gd` | Diff                      |
+| `<leader>gg` | Diff                      |
 | `<leader>gn` | Next hunk                 |
 | `<leader>gN` | Prev hunk                 |
 | `<leader>ga` | Stage hunk                |
 | `<leader>gu` | Undo stage hunk           |
 | `<leader>gA` | Add file in stage         |
+| `<leader>gs` | LazyGit (via Snacks)      |
 
 ### Debug (debugging.lua)
 
