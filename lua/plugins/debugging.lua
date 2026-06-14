@@ -15,7 +15,19 @@ return {
 
 			require("dapui").setup()
 			require("nvim-dap-virtual-text").setup()
-			require("dap-python").setup("python")
+
+			local dap_python = require("dap-python")
+			dap_python.setup("python")
+			dap_python.resolve_python = function()
+				local python = require("venv-selector").python()
+				if python then
+					return python
+				end
+				if vim.env.VIRTUAL_ENV then
+					return vim.env.VIRTUAL_ENV .. "\\Scripts\\python.exe"
+				end
+				return "python"
+			end
 
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()

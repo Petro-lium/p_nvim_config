@@ -29,7 +29,16 @@ return {
 				sections = {
 					lualine_a = { "mode" },
 					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = { "filename" },
+					lualine_c = {
+						"filename",
+						{
+							function()
+								local v = require("venv-selector").venv() or vim.env.VIRTUAL_ENV
+								return v and vim.fn.fnamemodify(v, ":t") or ""
+							end,
+							-- color = { fg = "#ffffff" },
+						},
+					},
 					lualine_x = { "encoding", "fileformat", "filetype" },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },

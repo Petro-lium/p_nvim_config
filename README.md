@@ -10,12 +10,17 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 | Тема              | Catppuccin (авто: latte/mocha)                |
 | Leader-клавиша    | `<Space>`                                     |
 | Фон               | auto (зависит от терминала)                   |
-| Отступы           | 4 пробела                                     |
+| Отступы           | Python: 4 пробела, остальные: 2               |
 | LSP-серверы       | pyright (Python), ruff (lint), html, djlint   |
-| Форматтеры        | conform.nvim (stylua, prettier, djlint, ruff) |
+| Форматтеры        | conform.nvim (stylua, prettier, djlint, ruff, sqlfluff) |
 | Отладка           | nvim-dap + debugpy (Python)                   |
 | Тесты             | nvim-neotest (pytest)                         |
 | Базы данных       | vim-dadbod + dadbod-ui                        |
+| HTTP-клиент       | kulala.nvim                                   |
+| AI-ассистент      | sidekick.nvim                                 |
+| Просмотр diff     | diffview.nvim                                 |
+| Иконки            | mini.icons                                    |
+| Popup-подсказки   | which-key.nvim                                |
 
 ## Структура проекта
 
@@ -31,16 +36,20 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── catppuccin.lua    # Тема (авто light/dark)
 │       ├── completions.lua   # nvim-cmp + LuaSnip + источники
 │       ├── debugging.lua     # nvim-dap + dap-ui + dap-python
-│       ├── git-stuff.lua     # vim-fugitive + gitsigns
-│       ├── lualine.lua       # Строка состояния
+│       ├── git-stuff.lua     # vim-fugitive + diffview.nvim + gitsigns
+│       ├── lualine.lua       # Строка состояния (с отображением venv)
 │       ├── lsp-config.lua    # Mason + lspconfig (ruff, html, djlint, pyright)
+│       ├── mini-icons.lua    # Иконки (mini.icons)
 │       ├── neo-tree.lua      # Файловый браузер + bufferline
-│       ├── conform.lua       # Форматтеры (stylua, prettier, djlint, ruff)
-│       ├── oil.lua           # Редактирование директории
+│       ├── conform.lua       # Форматтеры (stylua, prettier, djlint, ruff, sqlfluff)
+│       ├── oil.lua           # Редактирование директорий
+│       ├── sidekick.lua      # AI-ассистент (CLI)
+│       ├── snacks.lua        # Анимации, скролл, отступы, LazyGit
 │       ├── telescope.lua     # Fuzzy-поиск (fzf-native + ui-select)
 │       ├── treesitter.lua    # Подсветка синтаксиса + отступы (MSVC 'cl' на Windows)
 │       ├── venv-selector.lua # Авто-выбор Python venv
 │       ├── vim-dadbod.lua    # UI для баз данных
+│       ├── which-key.lua     # Всплывающие подсказки клавиш
 │       ├── kulala.lua        # HTTP-клиент (.http, .rest)
 │       └── neotest.lua       # Тесты (pytest, nvim-neotest)
 └── .gitignore
@@ -105,6 +114,7 @@ LSP-клавиши (активны только в файлах с подклю�
 | stylua                 | Lua                       |
 | prettier               | JS/JSON/CSS/Markdown/YAML |
 | djlint                 | HTML-шаблоны              |
+| sqlfluff               | SQL (PostgreSQL)          |
 
 Запуск: `<leader>gf` → `conform.format({ lsp_fallback = true })`
 
@@ -126,6 +136,13 @@ LSP-клавиши (активны только в файлах с подклю�
 | Клавиша     | Действие               |
 | ----------- | ---------------------- |
 | `<leader>h` | Снять подсветку поиска |
+
+### Терминал (vim-options.lua)
+
+| Клавиша      | Действие                         |
+| ------------ | -------------------------------- |
+| `<Esc>`      | Выйти из терминала в normal mode |
+| `<leader>pt` | Открыть PowerShell в терминале   |
 
 ### Telescope (telescope.lua)
 
@@ -160,12 +177,15 @@ LSP-клавиши (активны только в файлах с подклю�
 | ------------ | ----------------------------- |
 | `<leader>gh` | Просмотр hunk'а               |
 | `<leader>gb` | Вкл/выкл blame текущей строки |
-| `<leader>gd` | Показать diff                 |
+| `<leader>gd` | Показать diff (gitsigns)      |
+| `<leader>gD` | Открыть обзор diff (diffview) |
+| `<leader>gx` | Закрыть diffview              |
 | `<leader>gn` | Следующий hunk                |
 | `<leader>gN` | Предыдущий hunk               |
 | `<leader>ga` | Добавить hunk в staging       |
 | `<leader>gu` | Убрать hunk из staging        |
 | `<leader>gA` | Добавить файл в staging       |
+| `<leader>gs` | LazyGit (через Snacks)        |
 
 ### Отладка (debugging.lua)
 
@@ -180,6 +200,14 @@ LSP-клавиши (активны только в файлах с подклю�
 | Клавиша     | Действие                       |
 | ----------- | ------------------------------ |
 | `<leader>o` | Показать/скрыть структуру кода |
+
+### AI-ассистент (sidekick.lua)
+
+| Клавиша      | Действие                           |
+| ------------ | ---------------------------------- |
+| `<leader>ko` | Показать/скрыть AI CLI             |
+| `<leader>kc` | Закрыть AI CLI                     |
+| `<C-_>`      | Фокус на AI CLI из любого режима   |
 
 ### HTTP-клиент (kulala.lua)
 
@@ -244,4 +272,5 @@ LSP-клавиши (активны только в файлах с подклю�
 - Swap-файлы отключены (`vim.opt.swapfile = false`)
 - Фон определяется автоматически по терминалу (Catppuccin latte/mocha)
 - `.venv` автоматически определяется venv-selector (для Python-проектов)
-- Файлы `.rest` теперь распознаются как `http` через `vim.filetype.add` в `vim-options.lua`
+- Отступы настраиваются динамически: Python — 4 пробела, JS/TS/Lua/HTML/CSS/SQL/JSON/YAML/Markdown — 2 пробела
+- Файлы `.rest` распознаются как `http` через `vim.filetype.add` в `vim-options.lua`

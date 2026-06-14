@@ -15,7 +15,14 @@ return {
 		},
 		scroll = {
 			enabled = true,
-			animate = true,
+			animate = {
+				enabled = true,
+				easing = "outQuad",
+				duration = {
+					step = 20,
+					total = 300,
+				},
+			},
 		},
 		indent = {
 			enabled = true,
@@ -49,8 +56,7 @@ return {
 		{
 			"<leader>gs",
 			function()
-				-- Запуск lazygit в новом терминале (плавающем окне), чтобы он не блокировал экран
-				vim.cmd("split | term lazygit")
+				Snacks.lazygit()
 			end,
 			desc = "Git: LazyGit",
 		},
