@@ -48,6 +48,7 @@ return {
 				{ "<leader>t", group = "tests" },
 				{ "<leader>R", group = "http requests" },
 				{ "<leader>k", group = "sidekick" },
+				{ "<leader>p", group = "terminal" },
 				{ "<C-n>", group = "neo-tree" },
 				{ "<C-p>", group = "telescope" },
 				{ "<leader><leader>", group = "old files" },

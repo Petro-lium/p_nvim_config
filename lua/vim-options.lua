@@ -16,8 +16,12 @@ vim.keymap.set("n", "<c-l>", ":wincmd l<CR>", { desc = "window: right" })
 -- Terminal escape
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "terminal: exit to normal mode" })
 
--- Quick terminal
-vim.keymap.set("n", "<leader>pt", ":terminal powershell<CR>", { desc = "terminal: open powershell" })
+-- Quick terminal (floating window)
+vim.keymap.set("n", "<leader>pt", function()
+	Snacks.terminal("powershell -NoExit -ExecutionPolicy Bypass", {
+		win = { style = "float", width = 0.7, height = 0.7 },
+	})
+end, { desc = "terminal: open floating powershell" })
 
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "clear search highlight" })
 vim.wo.number = true
