@@ -19,4 +19,7 @@ node_modules/
 # Compiled Lua (if any)
 *.luac
 
+# Others
 .codegraph/
+lazy-lock.json
+lazy-lock.json.back
