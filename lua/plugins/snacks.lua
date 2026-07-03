@@ -60,12 +60,5 @@ return {
 			end,
 			desc = "Git: LazyGit",
 		},
-		{
-			"<leader>s",
-			function()
-				Snacks.notifier.notify("Snacks is working!")
-			end,
-			desc = "Snacks Test",
-		},
 	},
 }

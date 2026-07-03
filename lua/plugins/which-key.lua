@@ -39,6 +39,7 @@ return {
 			spec = {
 				{ mode = "n" },
 				{ "<leader>c", group = "code" },
+				{ "gc", group = "comment" },
 				{ "<leader>d", group = "debug / db" },
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },

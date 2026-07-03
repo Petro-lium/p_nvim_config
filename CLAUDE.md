@@ -19,6 +19,7 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 | AI Assistant   | sidekick.nvim                                 |
 | Diff Viewer    | diffview.nvim                                 |
 | Icon Provider  | mini.icons                                    |
+| Commenting     | Comment.nvim (gc/gb)                          |
 
 ## Project Structure
 
@@ -29,6 +30,7 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │   ├── vim-options.lua       # Core options, leader key, window nav keymaps, filetype overrides
 │   ├── plugins.lua           # Empty stub (return {}) — kept for lazy.nvim discovery
 │   └── plugins/              # One file per plugin or plugin group
+│       ├── comment.lua       # Comment toggle (Comment.nvim, gc/gb)
 │       ├── alpha.lua         # Start screen (ASCII art dashboard)
 │       ├── aerial.lua        # Code outline tree
 │       ├── catppuccin.lua    # Theme setup (auto light/dark)
@@ -100,7 +102,7 @@ LSP keymaps (active only on LspAttach):
 | `K`          | Hover documentation |
 | `<leader>ld` | Go to definition    |
 | `<leader>lr` | Find references     |
-| `<leader>ca` | Code action         |
+| `<leader>la` | Code action         |
 
 ## Formatting (conform.nvim)
 
@@ -233,6 +235,22 @@ Active in `.http` and `.rest` files.
 | `<C-e>`     | Abort              |
 | `<C-b>`     | Scroll docs up     |
 | `<C-f>`     | Scroll docs down   |
+
+### Comments (comment.lua)
+
+Plugin: [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim) — standard gc/gb mappings
+
+| Key     | Action                            |
+| ------- | --------------------------------- |
+| `gcc`   | Toggle line comment (current line)|
+| `gcNc`  | Toggle line comment (N lines)     |
+| `gbc`   | Toggle block comment (current)    |
+| `gbNc`  | Toggle block comment (N lines)    |
+| `gc` + m| Operator mode (e.g. `gcw`, `gc$`) |
+| `gb` + m| Block operator mode               |
+| `gc` (v)| Visual mode: toggle on selection  |
+
+All comments are toggleable — press again to uncomment.
 
 ## Adding Language Support
 

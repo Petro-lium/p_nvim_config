@@ -69,7 +69,7 @@ return {
 					)
 					vim.keymap.set(
 						"n",
-						"<leader>ca",
+						"<leader>la",
 						vim.lsp.buf.code_action,
 						{ buffer = ev.buf, desc = "LSP: Code action" }
 					)
