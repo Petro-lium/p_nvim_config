@@ -8,7 +8,8 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      -- "nvim-telescope/telescope-fzf-native.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake" },
 		},
 		config = function()
 			require("telescope").setup({

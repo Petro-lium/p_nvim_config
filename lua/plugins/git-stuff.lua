@@ -6,7 +6,9 @@ return {
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("diffview").setup({})
+			require("diffview").setup({
+				use_icons = false,
+			})
 
 			-- Глобальный обзор изменений проекта (заглавная D, чтобы не конфликтовать с gitsigns)
 			vim.keymap.set("n", "<leader>gD", ":DiffviewOpen<CR>", { desc = "git: project diff view" })
@@ -50,7 +52,7 @@ return {
 			vim.keymap.set("n", "<leader>gd", ":Gitsigns diffthis<CR>", { silent = true, desc = "Show diff" })
 			vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>", { silent = true, desc = "Next hunk" })
 			vim.keymap.set("n", "<leader>gN", ":Gitsigns prev_hunk<CR>", { silent = true, desc = "Prev hunk" })
-			vim.keymap.set("n", "<leader>gA", ":silent !git add %<CR>", { desc = "git: stage whole file" })
+			vim.keymap.set("n", "<leader>gA", ":Git add %<CR>", { desc = "git: stage whole file" })
 			vim.keymap.set("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { silent = true, desc = "Stage hunk" })
 			vim.keymap.set(
 				"n",

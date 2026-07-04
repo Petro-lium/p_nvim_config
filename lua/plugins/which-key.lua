@@ -3,7 +3,7 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		init = function()
-			vim.g.which_key_delay = 1000
+			vim.g.which_key_delay = 700
 		end,
 		opts = {
 			icons = {
@@ -39,7 +39,6 @@ return {
 			spec = {
 				{ mode = "n" },
 				{ "<leader>c", group = "code" },
-				{ "gc", group = "comment" },
 				{ "<leader>d", group = "debug / db" },
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },
