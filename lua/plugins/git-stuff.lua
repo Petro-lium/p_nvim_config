@@ -7,7 +7,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("diffview").setup({
-				use_icons = false,
+				use_icons = true,
 			})
 
 			-- Глобальный обзор изменений проекта (заглавная D, чтобы не конфликтовать с gitsigns)
