@@ -1,17 +1,17 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.cmd("set relativenumber")
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.relativenumber = true
 vim.g.mapleader = " "
 
 vim.opt.swapfile = false
 
 -- Navigate vim panes better
-vim.keymap.set("n", "<c-k>", ":wincmd k<CR>", { desc = "window: up" })
-vim.keymap.set("n", "<c-j>", ":wincmd j<CR>", { desc = "window: down" })
-vim.keymap.set("n", "<c-h>", ":wincmd h<CR>", { desc = "window: left" })
-vim.keymap.set("n", "<c-l>", ":wincmd l<CR>", { desc = "window: right" })
+vim.keymap.set("n", "<c-k>", "<cmd>wincmd k<CR>", { desc = "window: up" })
+vim.keymap.set("n", "<c-j>", "<cmd>wincmd j<CR>", { desc = "window: down" })
+vim.keymap.set("n", "<c-h>", "<cmd>wincmd h<CR>", { desc = "window: left" })
+vim.keymap.set("n", "<c-l>", "<cmd>wincmd l<CR>", { desc = "window: right" })
 
 -- Terminal escape
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "terminal: exit to normal mode" })
@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>pt", function()
 	})
 end, { desc = "terminal: open floating powershell" })
 
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "clear search highlight" })
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "clear search highlight" })
 vim.wo.number = true
 
 vim.filetype.add({

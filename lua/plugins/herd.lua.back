@@ -1,0 +1,45 @@
+return {
+	"MomePP/herd.nvim",
+	event = "VeryLazy",
+	opts = {
+		-- Список инструментов, которые можно запускать через Herdr
+		tools = {
+			claude = { cmd = { "claude" } },
+			-- Если используете OpenCode или другие, добавьте их сюда:
+			opencode = { cmd = { "opencode", "--continue" } },
+		},
+
+		-- 'float' — агенты открываются в полноэкранных окнах Neovim (рекомендуется)
+		-- 'native' — агенты открываются как соседние табы в самом Herdr
+		mode = "float",
+
+		-- Автоматически использовать snacks.nvim для глобального дашборда
+		picker = "auto",
+
+		-- Настройки отправки кода
+		send = {
+			context = true, -- Оборачивать выделение в path:line-range и fence (важно для AI)
+		},
+
+		-- Горячие клавиши
+		keys = {
+			toggle = "<leader>\\", -- Открыть/скрыть агента текущего проекта
+			send = "<leader>\\", -- (в Visual mode) отправить код агенту
+			hide = "<leader>\\", -- Скрыть окно изнутри терминала
+			select = "<leader>s", -- Пикер: переключить агента или создать нового
+			dashboard = "<leader>S", -- Глобальный список всех агентов всех проектов
+			newline = "<S-CR>", -- Shift+Enter для переноса строки в терминале
+		},
+
+		-- Стилизация плавающего окна
+		win = {
+			width = 1,
+			height = 1,
+			border = { "", "", "", "", " ", " ", " ", "" },
+			footer = true,
+		},
+	},
+	config = function(_, opts)
+		require("herd").setup(opts)
+	end,
+}

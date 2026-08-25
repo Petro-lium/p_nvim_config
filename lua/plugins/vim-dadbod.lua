@@ -4,6 +4,6 @@ return {
 		"kristijanhusak/vim-dadbod-ui",
 	},
 	config = function()
-		vim.keymap.set("n", "<leader>dd", ":DBUI<CR>", { silent = true, desc = "db: toggle UI" })
+		vim.keymap.set("n", "<leader>dd", "<cmd>DBUI<CR>", { silent = true, desc = "db: toggle UI" })
 	end,
 }

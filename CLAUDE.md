@@ -44,8 +44,7 @@ Dotfiles for a Python/web development Neovim setup with Catppuccin theme.
 │       ├── conform.lua       # Formatters (stylua, prettier, djlint, ruff, sqlfluff)
 │       ├── oil.lua           # Directory editing
 │       ├── sidekick.lua      # AI assistant (CLI)
-│       ├── snacks.lua        # Animations, scroll, indent, LazyGit
-│       ├── telescope.lua     # Fuzzy finder (fzf-native + ui-select)
+│       ├── snacks.lua        # Picker, animations, scroll, indent, LazyGit
 │       ├── treesitter.lua    # Syntax highlighting + indent (uses MSVC 'cl' on Windows)
 │       ├── venv-selector.lua # Python venv auto-selection
 │       ├── vim-dadbod.lua    # Database UI
@@ -110,13 +109,13 @@ Defined in `lua/plugins/conform.lua`:
 
 | Formatter              | Language                  |
 | ---------------------- | ------------------------- |
-| ruff_fix + ruff_format | Python                    |
+| ruff_format               | Python                    |
 | stylua                 | Lua                       |
 | prettier               | JS/JSON/CSS/Markdown/YAML |
 | djlint                 | HTML templates            |
 | sqlfluff               | SQL (PostgreSQL)          |
 
-Trigger: `<leader>gf` → `conform.format({ lsp_fallback = true })`
+Trigger: `<leader>gf` → `conform.format({ lsp_format = "fallback" })`
 
 Format on save is enabled automatically.
 
@@ -144,19 +143,20 @@ Format on save is enabled automatically.
 | `<Esc>`      | Exit terminal to normal mode   |
 | `<leader>pt` | Open PowerShell terminal       |
 
-### Telescope (telescope.lua)
+### Snacks Picker (snacks.lua)
 
-| Key                | Action     |
-| ------------------ | ---------- |
-| `<C-p>`            | Find files |
-| `<leader>fg`       | Live grep  |
-| `<leader><leader>` | Old files  |
+| Key          | Action                       |
+| ------------ | ---------------------------- |
+| `<C-p>`      | Smart picker (files/grep/buffers) |
+| `<leader>fg` | Live grep                    |
+| `<leader>ff` | All files                    |
 
 ### Neo-tree (neo-tree.lua)
 
 | Key          | Action                |
 | ------------ | --------------------- |
 | `<C-n>`      | Toggle file explorer  |
+| `<leader>bf` | Open buffers in float |
 | `<leader>bf` | Open buffers in float |
 
 ### Oil (oil.lua)
@@ -179,7 +179,7 @@ Format on save is enabled automatically.
 | `<leader>ga` | Stage hunk                |
 | `<leader>gu` | Undo stage hunk           |
 | `<leader>gA` | Add file in stage         |
-| `<leader>gs` | LazyGit (via Snacks)      |
+| `<leader>gl` | LazyGit (via Snacks)      |
 
 ### Debug (debugging.lua)
 
@@ -279,7 +279,7 @@ To re-enable: remove `.back` extension.
 
 ## Notes
 
-- `vim-options.lua` uses `vim.cmd("set ...")` style — matches existing convention
+- `vim-options.lua` uses `vim.opt` Lua API (not `vim.cmd("set ...")`)
 - Swap files disabled (`vim.opt.swapfile = false`)
 - Background is auto-detected from terminal — Catppuccin latte/mocha
 - `.venv` auto-detected by venv-selector (Python projects)

@@ -7,7 +7,6 @@ return {
 
 		config = function()
 			require("catppuccin").setup({
-				auto_integrations = true,
 				flavour = "auto", -- latte, frappe, macchiato, mocha
 				background = { -- :h background
 					light = "latte",
@@ -35,11 +34,16 @@ return {
 				},
 				color_overrides = {},
 				custom_highlights = {},
-				default_integrations = true,
+				auto_integrations = true,
 				integrations = {
 					cmp = true,
 					gitsigns = true,
+					nvimtree = true,
 					notify = true,
+					mini = {
+						enabled = true,
+						indentscope_color = "",
+					},
 					-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 				},
 			})

@@ -7,7 +7,7 @@ For a full reference (all keymaps, every plugin, common tasks) see [`CLAUDE.md`]
 ## Repo Structure
 
 ```
-init.lua                   # bootsrap lazy.nvim, sources vim-options + plugins
+init.lua                   # bootstrap lazy.nvim, sources vim-options + plugins
 lua/
   vim-options.lua          # core options, leader key, window nav keymaps, filetype overrides
   plugins.lua              # stub (return {}), kept for lazy.nvim discovery
@@ -40,7 +40,7 @@ Conventions:
 
 - Treesitter compiles parsers with MSVC `cl.exe` (not gcc). Ensure `cl` is on PATH.
 - neotest-python: pytest result keys use `\` path separators matching neotest's `lib.files.sep` — **do NOT** normalise paths with `gsub("\\", "/")`, it breaks result-key matching.
-- diffview.nvim: no nvim-web-devicons; `use_icons = false` in setup.
+- diffview.nvim: no nvim-web-devicons; `use_icons = true` in setup.
 - LazyGit opened via `Snacks.lazygit()` (not raw terminal).
 - Quick terminal: `Snacks.terminal("powershell ...")` via `<leader>pt`.
 
@@ -52,10 +52,10 @@ Servers: pyright, ruff, html, djlint. Configured via `vim.lsp.config()`.
 LSP keymaps bound on `LspAttach` with `buffer = ev.buf`.
 
 ### Formatters (`conform.lua`)
-Auto-format on save (1s timeout). Trigger: `<leader>gf`.
+Auto-format on save (2s timeout). Trigger: `<leader>gf`.
 | Lang | Formatter |
 |------|-----------|
-| Python | `ruff_fix`, `ruff_format` |
+| Python | `ruff_format` |
 | Lua | `stylua` |
 | JS/TS/CSS/JSON/YAML/MD | `prettier` |
 | HTML | `djlint` |
@@ -70,24 +70,28 @@ neotest-python with pytest (`--no-header --tb=short -s`).
 
 ### Git (`git-stuff.lua`)
 Uses vim-fugitive (`:Git add %`), gitsigns, diffview.nvim.
-diffview: `use_icons = false`, opened via `<leader>gD`.
+diffview: `use_icons = true`, opened via `<leader>gD`.
 
 ### DAP (`debugging.lua`)
-nvim-dap + dap-python (debugpy from Mason). `python = function() return "python" end`.
+nvim-dap + dap-python (debugpy from Mason). Python resolver: venv-selector → `$VIRTUAL_ENV` → fallback `"python"`.
 
 ## Key Leader Shortcuts
 
 | Key | Plugin | Action |
 |-----|--------|--------|
-| `<C-p>` | telescope | Find files |
-| `<leader>fg` | telescope | Live grep |
-| `<leader><leader>` | telescope | Old files |
+| `<C-p>` | snacks | Smart picker (files + grep + buffers) |
+| `<leader>fg` | snacks | Live grep |
+| `<leader>ff` | snacks | All files |
 | `<C-n>` | neo-tree | Toggle file tree |
+| `<leader>bf` | neo-tree | Open buffers in float |
 | `-` | oil | Dir edit float |
 | `<leader>o` | aerial | Code outline |
 | `<leader>gf` | conform | Format file |
 | `<leader>h` | — | Clear search hl |
 | `<leader>dd` | dadbod | DB UI |
+| `<leader>gD` | diffview | Open diff view |
+| `<leader>gx` | diffview | Close diff view |
+| `<leader>gl` | snacks | LazyGit |
 | `<leader>Rs/Ra/Rb` | kulala | HTTP requests |
 | `<leader>ko/kc` | sidekick | AI CLI toggle/close |
 
@@ -95,4 +99,4 @@ nvim-dap + dap-python (debugpy from Mason). `python = function() return "python"
 - lua-language-server, debugpy, ruff, djlint, prettier, sqlfluff, stylua
 
 ## .gitignore
-Ignores: `*.swp`, `*.swo`, `*~`, `*.bak`, `*.log`, `.codegraph/`, `lazy-lock.json`, `node_modules/`, `*.luac`, OS files.
+Ignores: `*.swp`, `*.swo`, `*~`, `*.bak`, `*.un~`, `*.log`, `.codegraph/`, `lazy-lock.json`, `lazy-lock.json.back`, `node_modules/`, `*.luac`, OS files (`.DS_Store`, `Thumbs.db`, `desktop.ini`).

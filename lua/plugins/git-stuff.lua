@@ -11,8 +11,8 @@ return {
 			})
 
 			-- Глобальный обзор изменений проекта (заглавная D, чтобы не конфликтовать с gitsigns)
-			vim.keymap.set("n", "<leader>gD", ":DiffviewOpen<CR>", { desc = "git: project diff view" })
-			vim.keymap.set("n", "<leader>gx", ":DiffviewClose<CR>", { desc = "git: close diff view" })
+			vim.keymap.set("n", "<leader>gD", "<cmd>DiffviewOpen<CR>", { desc = "git: project diff view" })
+			vim.keymap.set("n", "<leader>gx", "<cmd>DiffviewClose<CR>", { desc = "git: close diff view" })
 		end,
 	},
 	{
@@ -47,17 +47,22 @@ return {
 			})
 
 			-- Git клавиши (избегаем конфликтов с LSP)
-			vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "git: preview hunk" })
-			vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "git: toggle blame" })
-			vim.keymap.set("n", "<leader>gd", ":Gitsigns diffthis<CR>", { silent = true, desc = "Show diff" })
-			vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>", { silent = true, desc = "Next hunk" })
-			vim.keymap.set("n", "<leader>gN", ":Gitsigns prev_hunk<CR>", { silent = true, desc = "Prev hunk" })
-			vim.keymap.set("n", "<leader>gA", ":Git add %<CR>", { desc = "git: stage whole file" })
-			vim.keymap.set("n", "<leader>ga", ":Gitsigns stage_hunk<CR>", { silent = true, desc = "Stage hunk" })
+			vim.keymap.set("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", { desc = "git: preview hunk" })
+			vim.keymap.set(
+				"n",
+				"<leader>gb",
+				"<cmd>Gitsigns toggle_current_line_blame<CR>",
+				{ desc = "git: toggle blame" }
+			)
+			vim.keymap.set("n", "<leader>gd", "<cmd>Gitsigns diffthis<CR>", { silent = true, desc = "Show diff" })
+			vim.keymap.set("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { silent = true, desc = "Next hunk" })
+			vim.keymap.set("n", "<leader>gN", "<cmd>Gitsigns prev_hunk<CR>", { silent = true, desc = "Prev hunk" })
+			vim.keymap.set("n", "<leader>gA", "<cmd>Git add %<CR>", { desc = "git: stage whole file" })
+			vim.keymap.set("n", "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", { silent = true, desc = "Stage hunk" })
 			vim.keymap.set(
 				"n",
 				"<leader>gu",
-				":Gitsigns undo_stage_hunk<CR>",
+				"<cmd>Gitsigns undo_stage_hunk<CR>",
 				{ silent = true, desc = "Undo stage hunk" }
 			)
 		end,

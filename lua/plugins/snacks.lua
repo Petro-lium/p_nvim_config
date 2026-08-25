@@ -44,21 +44,28 @@ return {
 			function()
 				Snacks.picker.smart()
 			end,
-			desc = "Snacks: Smart Picker",
+			desc = "picker: smart (files + grep + buffers)",
 		},
 		{
-			"<leader><leader>",
+			"<leader>fg",
 			function()
-				Snacks.picker.files({ smart = true })
+				Snacks.picker.grep()
 			end,
-			desc = "Snacks: Recent Files",
+			desc = "picker: live grep",
 		},
 		{
-			"<leader>gs",
+			"<leader>ff",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "picker: all files",
+		},
+		{
+			"<leader>gl",
 			function()
 				Snacks.lazygit()
 			end,
-			desc = "Git: LazyGit",
+			desc = "git: LazyGit",
 		},
 	},
 }

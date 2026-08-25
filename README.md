@@ -46,8 +46,7 @@ Dotfiles для Python/web разработки на Neovim с темой Catppu
 │       ├── conform.lua       # Форматтеры (stylua, prettier, djlint, ruff, sqlfluff)
 │       ├── oil.lua           # Редактирование директорий
 │       ├── sidekick.lua      # AI-ассистент (CLI)
-│       ├── snacks.lua        # Анимации, скролл, отступы, LazyGit
-│       ├── telescope.lua     # Fuzzy-поиск (fzf-native + ui-select)
+│       ├── snacks.lua        # Picker, анимации, скролл, отступы, LazyGit
 │       ├── treesitter.lua    # Подсветка синтаксиса + отступы (MSVC 'cl' на Windows)
 │       ├── venv-selector.lua # Авто-выбор Python venv
 │       ├── vim-dadbod.lua    # UI для баз данных
@@ -112,13 +111,13 @@ LSP-клавиши (активны только в файлах с подклю�
 
 | Форматтер              | Язык                      |
 | ---------------------- | ------------------------- |
-| ruff_fix + ruff_format | Python                    |
+| ruff_format                 | Python                    |
 | stylua                 | Lua                       |
 | prettier               | JS/JSON/CSS/Markdown/YAML |
 | djlint                 | HTML-шаблоны              |
 | sqlfluff               | SQL (PostgreSQL)          |
 
-Запуск: `<leader>gf` → `conform.format({ lsp_fallback = true })`
+Запуск: `<leader>gf` → `conform.format({ lsp_format = "fallback" })`
 
 Форматирование при сохранении включено автоматически.
 
@@ -146,13 +145,13 @@ LSP-клавиши (активны только в файлах с подклю�
 | `<Esc>`      | Выйти из терминала в normal mode |
 | `<leader>pt` | Открыть PowerShell в терминале   |
 
-### Telescope (telescope.lua)
+### Snacks Picker (snacks.lua)
 
-| Клавиша            | Действие                         |
-| ------------------ | -------------------------------- |
-| `<C-p>`            | Найти файлы                      |
-| `<leader>fg`       | Поиск по содержимому (live grep) |
-| `<leader><leader>` | Последние файлы                  |
+| Клавиша      | Действие                              |
+| ------------ | ------------------------------------- |
+| `<C-p>`      | Умный picker (файлы + grep + буферы)  |
+| `<leader>fg` | Поиск по содержимому (live grep)      |
+| `<leader>ff` | Все файлы                             |
 
 ### Базы данных (vim-dadbod.lua)
 
@@ -187,7 +186,7 @@ LSP-клавиши (активны только в файлах с подклю�
 | `<leader>ga` | Добавить hunk в staging       |
 | `<leader>gu` | Убрать hunk из staging        |
 | `<leader>gA` | Добавить файл в staging       |
-| `<leader>gs` | LazyGit (через Snacks)        |
+| `<leader>gl` | LazyGit (через Snacks)        |
 
 ### Отладка (debugging.lua)
 
